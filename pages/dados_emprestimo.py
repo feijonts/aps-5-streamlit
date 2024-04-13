@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from datetime import datetime
 
-BASE_URL = 'http://localhost:5000/emprestimos'
+BASE_URL = 'https://aps-5-7418c433bf87.herokuapp.com/emprestimos'
 
 def buscar_emprestimo(id_emprestimo):
     try:

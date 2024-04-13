@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-BASE_URL = 'http://localhost:5000/usuarios'
+BASE_URL = 'https://aps-5-7418c433bf87.herokuapp.com/usuarios'
 dados = {
     'ID': [],
     'Nome': [],
