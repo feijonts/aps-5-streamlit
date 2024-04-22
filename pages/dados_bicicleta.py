@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from datetime import datetime
 
-BASE_URL = 'https://aps-5-7418c433bf87.herokuapp.com/bikes'
+BASE_URL = 'http://localhost:5000/bikes'
 
 def buscar_bike(id_bike):
     try:
@@ -55,7 +55,7 @@ def main():
 
     if buscar and id_bike and id_bike != '':
         response = buscar_bike(id_bike)
-        if response:
+        if response is not None:
             if response.status_code == 200:
                 st.session_state.data = response.json()
             else:
@@ -75,13 +75,13 @@ def main():
         status = st.selectbox('Status', ['Disponivel', 'Em uso'], index = 0 if data.get('status') == 'disponivel' else 1)
 
         atualizar = st.button('Atualizar Bicicleta')
-        remover = st.button('Remover Bicicleta')
+        remover = st.button('Remover Bicicleta', type='primary')
 
         if atualizar and marca and modelo and cidade and status:
             if marca != data.get('marca') or modelo != data.get('modelo') or cidade != data.get('cidade') or status != data.get('status'):
                 status = status.lower()
                 response = atualizar_bike(data['_id'], marca, modelo, cidade, status)
-                if response:
+                if response is not None:
                     if response.status_code == 200:
                         st.session_state.mensagem = { 'sucesso': 'Bicicleta atualizada com sucesso!' }
                     else:
@@ -93,7 +93,7 @@ def main():
     
         if remover:
             response = remover_bike(data['_id'])
-            if response:
+            if response is not None:
                 if response.status_code == 204:
                     st.session_state.mensagem = { 'sucesso': 'Bicicleta removida com sucesso!' }
                 else:

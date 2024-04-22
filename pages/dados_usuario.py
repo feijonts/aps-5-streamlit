@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from datetime import datetime
 
-BASE_URL = 'https://aps-5-7418c433bf87.herokuapp.com/usuarios'
+BASE_URL = 'http://localhost:5000/usuarios'
 
 def buscar_usuario(usuario_id):
     try:
@@ -54,7 +54,7 @@ def main():
 
     if buscar and id_usuario and id_usuario != '':
         response = buscar_usuario(id_usuario)
-        if response:
+        if response is not None:
             if response.status_code == 200:
                 st.session_state.data = response.json()
             else:
@@ -82,7 +82,7 @@ def main():
             if nome != data.get('nome') or cpf != data.get('cpf') or data_nascimento != data.get('data_nascimento'):
                 data_nascimento = str(data_nascimento)
                 response = atualizar_usuario(data['_id'], nome, cpf, data_nascimento)
-                if response:
+                if response is not None:
                     if response.status_code == 200:
                         st.session_state.mensagem = { 'sucesso': 'Usuário atualizado com sucesso!' }
                     else:
@@ -94,7 +94,7 @@ def main():
     
         if remover:
             response = remover_usuario(data['_id'])
-            if response:
+            if response is not None:
                 if response.status_code == 204:
                     st.session_state.mensagem = { 'sucesso': 'Usuário removido com sucesso!' }
                 else:

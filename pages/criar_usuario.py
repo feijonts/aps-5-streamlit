@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from datetime import datetime
 
-BASE_URL = 'https://aps-5-7418c433bf87.herokuapp.com/usuarios'
+BASE_URL = 'http://localhost:5000/usuarios'
 
 def criar_usuario(nome, cpf, data_nascimento):
     try:

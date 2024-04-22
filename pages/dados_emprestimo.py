@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from datetime import datetime
 
-BASE_URL = 'https://aps-5-7418c433bf87.herokuapp.com/emprestimos'
+BASE_URL = 'http://localhost:5000/emprestimos'
 
 def buscar_emprestimo(id_emprestimo):
     try:
@@ -42,7 +42,7 @@ def main():
 
     if buscar and id_emprestimo and id_emprestimo != '':
         response = buscar_emprestimo(id_emprestimo)
-        if response:
+        if response is not None:
             if response.status_code == 200:
                 st.session_state.data = response.json()
             else:
@@ -65,7 +65,7 @@ def main():
     
         if remover:
             response = remover_emprestimo(data['_id'])
-            if response:
+            if response is not None:
                 if response.status_code == 204:
                     st.session_state.mensagem = { 'sucesso': 'Emprestimo removido com sucesso!' }
                 else:

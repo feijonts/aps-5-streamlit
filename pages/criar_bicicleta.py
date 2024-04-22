@@ -1,7 +1,7 @@
 import streamlit as st 
 import requests
 
-BASE_URL = 'https://aps-5-7418c433bf87.herokuapp.com/bikes'
+BASE_URL = 'http://localhost:5000/bikes'
 
 def criar_bike(marca, modelo, cidade, status):
     try:
